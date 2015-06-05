@@ -58,6 +58,70 @@ describe('resize.cmdVersion()', function() {
 
     assert.equal(cmd, out);
   });
+
+  it('sets flatten flag if option is true', function() {
+    var image = {
+      path: './a.jpg',
+      width: 2000,
+      height: 1000
+    };
+
+    var version = {
+      suffix: '-flat',
+      quality: 50,
+      maxWidth: 500,
+      maxHeight: 500,
+      flatten: true
+    };
+
+    var cmd = resize.cmdVersion(image, version);
+    var out = 'mpr:./a.jpg -quality 50 -flatten -resize "500x500" -write a-flat.jpg +delete';
+
+    assert.equal(cmd, out);
+  });
+
+  it('sets output format if specified', function() {
+    var image = {
+      path: './a.jpg',
+      width: 2000,
+      height: 1000
+    };
+
+    var version = {
+      suffix: '-format',
+      quality: 50,
+      maxWidth: 500,
+      maxHeight: 500,
+      format: 'png'
+    };
+
+    var cmd = resize.cmdVersion(image, version);
+    var out = 'mpr:./a.jpg -quality 50 -resize "500x500" -write a-format.png +delete';
+
+    assert.equal(cmd, out);
+  });
+
+  it('sets background if specified', function() {
+    var image = {
+      path: './a.jpg',
+      width: 2000,
+      height: 1000
+    };
+
+    var version = {
+      suffix: '-background',
+      quality: 50,
+      maxWidth: 500,
+      maxHeight: 500,
+      background: 'red'
+    };
+
+    var cmd = resize.cmdVersion(image, version);
+    var out = 'mpr:./a.jpg -quality 50 -background "red" -resize "500x500" -write a-background.jpg +delete';
+
+    assert.equal(cmd, out);
+  });
+
 });
 
 describe('resize()', function() {
