@@ -38,6 +38,9 @@ Resize a given source `image` into several `versions`.
   * **integer** `maxWidth` - max width for resized image
   * **integer** `maxHeight` - max height for resized image
   * **string** `ratio` - force aspectratio on resized image (ex. "4:3")
+  * **boolean** `flatten` - merge all layers. [Read more](http://www.imagemagick.org/script/command-line-options.php#flatten)
+  * **string** `background` - set a background color on the current canvas, accepts a color name, a hex color, or a numerical RGB, RGBA, HSL, HSLA, CMYK, or CMYKA specification. (ex. "red", "#ff0000")
+  * **string** `format` - output format to convert the original image to. (ex. "png") [Read more](http://www.imagemagick.org/script/command-line-options.php#format)
 * **function** `cb` - callback function (**Error** `error`, **object[]** `versions`)
   * **Error** `error` - error output if command failed
   * **object[]** `versions` - resized image versions
@@ -61,7 +64,10 @@ var versions = [{
   suffix: '-square',
   maxHeight: 200,
   maxWidth: 200,
-  aspect: "1:1"
+  aspect: "1:1",
+  flatten: true,
+  format: "png",
+  background: "green"
 ]};
 
 resize(image, versions, function(error, versions) {
